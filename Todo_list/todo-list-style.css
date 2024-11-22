@@ -51,6 +51,7 @@ main {
     list-style: none;
     padding: .1em 1em;
     border-bottom: .2em solid #2fcdf5;
+    overflow-wrap: break-word;
 }
 
 .task:hover {
