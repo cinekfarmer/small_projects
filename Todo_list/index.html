@@ -9,17 +9,25 @@
     <meta name="author" content="cinekfarmer">
 
     <link rel="stylesheet" href="todo-list-style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="fontello/css/fontello.css">
 </head>
 <body>
     <nav>
         <a href="../index.html">BACK</a>
     </nav>
     <main>
-        <input type="text" class="input">
-        <button>Add</button>
+        <section>
+            <input type="text" class="text-input" placeholder="New task">
+            <button class="input-button">➕</button>
+        </section>
         <ul class="output">
-            <li class="task">Create the app <span> [DELETE]</span></li>
-            <li class="task done">Go procrastinate<span> [DELETE]</span></li>
+            <li class="task"><span class="undone">Create the app </span><span class="icon-trash"></span></li>
+            <li class="task"><span class="done">Go procrastinate </span><span class="icon-trash"></span></li>
         </ul>
     </main>
     <script src="todo-list-script.js"></script>
