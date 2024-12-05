@@ -12,7 +12,9 @@ INPUT.addEventListener('keyup', () => {
 
 let taskList = [];
 
-run()
+loadLocalSave();
+
+run();
 
 function run() {
     addListeners();
@@ -24,24 +26,30 @@ function addNewTask() {
     }
 
     addTask(INPUT.value);
+    saveLocally(taskList);
     clearTextInput();
+    showList(taskList);
+    addListeners();
+}
+
+function deleteTask(taskElement) {
+    taskList.splice(taskElement.parentElement.id, 1);
+    saveLocally(taskList)
     showList(taskList);
     addListeners();
 }
 
 function markTask(task) {
     task.firstElementChild.classList.toggle('done');
+    taskList[task.id].isComplited = taskList[task.id].isComplited ? false : true;
+    call(task.id);
 }
 
-function deleteTask(task) {
-    let taskId = task.parentElement.id;
-    taskList.splice(taskId, 1);
-    showList(taskList);
-    addListeners();
-}
-
-function addTask(task) {    
-    taskList.push(task);
+function addTask(newTask) {    
+    taskList.push({
+        name: newTask,
+        isComplited: false
+    });
 }
 
 function clearTextInput() {
@@ -51,9 +59,10 @@ function clearTextInput() {
 function showList(list) {
     let html = "";
     for (i=0; i < list.length; i++) {
+        let classStatus = list[i].isComplited ? 'done' : '';
         html += `
         <li id="${i}" class="task">
-            <span class="undone">${list[i]} </span>
+            <span class="${classStatus}">${list[i].name} </span>
             <span id="deleteBtn" class="icon-trash">
         </span></li>`
     }
@@ -71,6 +80,16 @@ function addListeners() {
         let task = DELETE_LIST[i];
         task.addEventListener('click', () => deleteTask(task));
     }
+}
+
+function saveLocally(list) {
+    localStorage.setItem('list', JSON.stringify(list));
+}
+
+function loadLocalSave() {
+    taskList = JSON.parse(localStorage.getItem('list'));
+    showList(taskList);
+    addListeners();
 }
 
 //debugging

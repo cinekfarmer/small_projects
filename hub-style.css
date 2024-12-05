@@ -33,6 +33,7 @@ body {
     margin: 8rem 2rem;
     gap: 4em;
     grid-template-columns: repeat(auto-fit, minmax(8em, 1fr));
+    
 }
 
 .section__project {
